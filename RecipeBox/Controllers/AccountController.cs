@@ -4,18 +4,18 @@ using RecipeBox.Models;
 using System.Threading.Tasks;
 using RecipeBox.ViewModels;
 
-namespace RecipeBox.AddControllers
+namespace RecipeBox.Controllers
 {
-    public class AccountController: AddControllers
+    public class AccountController: Controller
     {
         private readonly RecipeBoxContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManger;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public AccountController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RecipeBoxContext db)
         {
             _userManager = userManager;
-            _signInManger = signInManager;
+            _signInManager = signInManager;
             _db = db;
         }
         public ActionResult Index()
@@ -24,6 +24,7 @@ namespace RecipeBox.AddControllers
         } 
         public IActionResult Register()
         {
+            ViewBag.Title = "Register User";
             return View();
         }
 
@@ -36,7 +37,7 @@ namespace RecipeBox.AddControllers
             }
             else
             {
-                ApplicationUser user = new ApplicationUser { userName = model.Email}:
+                ApplicationUser user = new ApplicationUser { UserName = model.UserName, Email = model.Email};
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -52,6 +53,40 @@ namespace RecipeBox.AddControllers
                 }
             }
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Login(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            else 
+            {
+                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: true, lockoutOnFailure: false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "There is something wrong with your email or username. Please try again.");
+                        return View(model);
+                    }
+            }
+        }
+        [HttpPost]
+        public async Task<ActionResult> LogOff()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

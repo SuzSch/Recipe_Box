@@ -10,6 +10,7 @@ namespace RecipeBox.Models
         public string Directions { get; set; }
         public int Rating { get; set; }
         public List<RecipeIng> JoinEntities { get; }
+        public ApplicationUser User { get; set; }
 
     }
 }
