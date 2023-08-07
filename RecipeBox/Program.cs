@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RecipeBox.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace RecipeBox
 {
@@ -21,6 +22,9 @@ namespace RecipeBox
                           )
                         )
                       );
+        builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<RecipeBoxContext>()
+                .AddDefaultTokenProviders();
 
       WebApplication app = builder.Build();
 
@@ -29,6 +33,9 @@ namespace RecipeBox
       app.UseStaticFiles();
 
       app.UseRouting();
+
+      app.UseAuthentication(); 
+      app.UseAuthorization();
 
       app.MapControllerRoute(
           name: "default",
