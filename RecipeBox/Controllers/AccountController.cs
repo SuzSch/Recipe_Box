@@ -39,10 +39,17 @@ namespace RecipeBox.Controllers
             {
                 ApplicationUser user = new ApplicationUser { UserName = model.UserName, Email = model.Email};
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-                await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                    Microsoft.AspNetCore.Identity.SignInResult signResult = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: true, lockoutOnFailure: false);
+                    if(signResult.Succeeded)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login");
+                    }                    
                 }
                 else
                 {
@@ -57,6 +64,7 @@ namespace RecipeBox.Controllers
 
         public ActionResult Login()
         {
+            ViewBag.Title = "Login";
             return View();
         }
 

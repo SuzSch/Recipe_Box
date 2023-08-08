@@ -1,0 +1,31 @@
+@{
+    Layout = "_Layout";
+}
+
+@using RecipeBox.Models;
+
+<h1>Ingredients</h1>
+<hr>
+
+@if (Model.Count == 0)
+{
+    <h3>No ingredients have been added to the site's database, you jumbo dumbo!</h3>
+}
+else 
+{
+    <ul>
+        @foreach (Ing ing in Model)
+        {
+            <li>@ing.Name </li>
+            @using (Html.BeginForm("Delete", "Ings"))
+            {
+                @Html.Hidden("id", ing.IngId)
+                <input type="submit" value="Delete" />
+            }
+        }
+    </ul>
+}
+<hr>
+
+<p>@Html.ActionLink("Add Ingredient", "Create")</p>
+<p>@Html.ActionLink("Back to Home", "Index", "Home")</p>
