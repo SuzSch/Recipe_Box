@@ -11,7 +11,6 @@ using System.Security.Claims;
 
 namespace RecipeBox.Controllers
 {
-    [Authorize]
     public class IngsController : Controller
     {
         

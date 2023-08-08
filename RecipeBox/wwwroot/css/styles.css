@@ -2,3 +2,8 @@
 body {
   margin-bottom: 60px;
 }
+
+.directionBox {
+  width: 500px;
+  height: 50px;
+}
