@@ -24,10 +24,12 @@ namespace RecipeBox.Controllers
 
         public async Task<ActionResult> Index()
         {
+            ViewBag.IngId = new SelectList(_db.Ings, "IngId", "Name");
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
             List<Recipe> userRecipes = _db.Recipes
                                     .Where(entry => entry.User.Id == currentUser.Id)
+                                    .OrderByDescending(entry => entry.Rating)
                                     .ToList();
             ViewBag.Title = "Recipes List";
             return View(userRecipes);
@@ -167,5 +169,25 @@ namespace RecipeBox.Controllers
             _db.SaveChanges();
             return RedirectToAction("Details", new {id = joinEntry.RecipeId});
         }
+
+        [HttpPost]
+        public async Task<ActionResult> SortByIng(int ingId)
+        {
+            ViewBag.IngId = new SelectList(_db.Ings, "IngId", "Name");
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+            List<RecipeIng> entries = _db.RecipeIngs
+                                    .Where(entry => entry.IngId == ingId)                                    
+                                    .Include(entry => entry.Recipe)  
+                                    .Where(entry => entry.Recipe.User.Id == currentUser.Id)                                
+                                    .ToList();
+            return View(entries);
+        }
+
+        // public ActionResult SortByIng()
+        // {
+        //     ViewBag.Title = "Sorted";
+        //     return View();
+        // }
     }
 }

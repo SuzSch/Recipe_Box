@@ -4,6 +4,8 @@
 
 @using RecipeBox.Models;
 
+
+
 <h1>Here are your recipes!</h1>
 
 @if (ViewBag.Warning != null)
@@ -20,9 +22,22 @@ else
     <ul>
     @foreach (Recipe recipe in Model)
         {
-            <li>@Html.ActionLink($"{recipe.RecipeName}", "Details", new {id = recipe.RecipeId})</li>
+            <li>@Html.ActionLink($"{recipe.RecipeName}", "Details", new {id = recipe.RecipeId}) : Rating: @recipe.Rating</li>
+            @* @HtmlGenericControl li = new HtmlGenericControl("li");
+            @for(int i = 0; i <= @recipe.Rating; i++)
+            {
+                li.Append("Hi!");
+            } *@
         }
     </ul>
+}
+<h3>Find a recipe by your favorite ingredient.</h3>
+@using (Html.BeginForm("SortByIng", "Recipes"))
+{
+    @Html.Label("Select an Ingredient")
+    @Html.DropDownList("IngId")
+
+    <input type="submit" value="See Recipe" />
 }
 <p>@Html.ActionLink("Add a new recipe", "Create")</p>
 <p>@Html.ActionLink("Back to home page", "Index", "Home")</p>
