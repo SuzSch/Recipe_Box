@@ -4,6 +4,8 @@ using RecipeBox.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace RecipeBox.Controllers
 {

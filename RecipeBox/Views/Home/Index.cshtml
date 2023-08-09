@@ -3,7 +3,14 @@
 }
 @using RecipeBox.Models;
 
-<h1>Welcome to Your Recipe Box!</h1>
+@if (User.Identity.IsAuthenticated)
+{
+    <h1>Welcome to Your Recipe Box, @User.Identity.Name!</h1>
+}
+else
+{
+    <h1>Hello, Welcome to Recipe Box!</h1>
+}
 
 <p>@Html.ActionLink("Manage recipes", "Index", "Recipes")</p>
 <p>@Html.ActionLink("Manage ingredients", "Index", "Ings")</p>

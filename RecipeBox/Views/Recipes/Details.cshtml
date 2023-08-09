@@ -14,7 +14,6 @@
 @if (@Model.JoinEntities.Count == 0)
 {
     <p>This recipe does not have any ingredients added yet, ya dingus!</p>
-
 }
 else
 {
@@ -26,13 +25,20 @@ else
             @using (Html.BeginForm("DeleteJoin", "Recipes"))
             {
                 @Html.Hidden("joinId", @join.RecipeIngId)
-                <input type="submit" value="Delete" />
+                <input type="submit" value="Delete"/>
             }
         }
     </ul>
 }
+@using (Html.BeginForm("AddIng", "Recipes"))
+{
+    @Html.HiddenFor(model => model.RecipeId)
+    @Html.Label("Select an Ingredient")
+    @Html.DropDownList("IngId")
+
+    <input type="submit" value="Add Ingredient" />
+}
 
 <p>@Html.ActionLink("Back to Recipe List", "Index")</p>
 <p>@Html.ActionLink("Edit Recipe", "Edit", new {id = Model.RecipeId})</p>
-<p>@Html.ActionLink("Add an ingredient","AddIng", new {id = Model.RecipeId})</p>
 <p>@Html.ActionLink("Delete Recipe", "Delete", new {id = Model.RecipeId})</p>

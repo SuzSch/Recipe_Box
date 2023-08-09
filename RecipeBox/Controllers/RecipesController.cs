@@ -58,9 +58,10 @@ namespace RecipeBox.Controllers
         }
 
 
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
             ViewBag.Title = "Recipe Details";
+            ViewBag.IngId = new SelectList(_db.Ings, "IngId", "Name");
             Recipe thisRecipe = _db.Recipes
             .Include(recipe => recipe.JoinEntities)
             .ThenInclude(join => join.Ing)
@@ -68,7 +69,24 @@ namespace RecipeBox.Controllers
 
             //Then set current user (see line 51-52)
             // then do branching logic to see View or redirect if current user does not match user for recipe
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+            if (currentUser == thisRecipe.User)
+            {
             return View(thisRecipe);
+            }
+            else 
+            {
+            return RedirectToAction ("BozoCatcher");
+            }
+        }
+
+        public async Task<ActionResult> BozoCatcher()
+        {
+            ViewBag.Title = "Unauthorized!! :X";
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+            return View(currentUser);
         }
 
         public ActionResult Edit(int id)
@@ -106,14 +124,6 @@ namespace RecipeBox.Controllers
             _db.Recipes.Remove(thisRecipe);
             _db.SaveChanges();
             return RedirectToAction("index");
-        }
-
-        public ActionResult AddIng(int id)
-        {
-            ViewBag.Title = "Add an ingredient";
-            Recipe thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
-            ViewBag.IngId = new SelectList(_db.Ings, "IngId", "Name");
-            return View(thisRecipe);
         }
 
         [HttpPost]
