@@ -89,11 +89,21 @@ namespace RecipeBox.Controllers
             return View(currentUser);
         }
 
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             ViewBag.Title = "Edit Recipe";
             Recipe modelRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
+
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+            if (currentUser == modelRecipe.User)
+            {
             return View(modelRecipe);
+            }
+            else
+            {
+            return RedirectToAction ("BozoCatcher");   
+            }
         }
 
         [HttpPost]
@@ -110,11 +120,20 @@ namespace RecipeBox.Controllers
                 return RedirectToAction("Details", new { id = recipe.RecipeId });
             }
         }
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             ViewBag.Title = "Delete Recipe";
             Recipe thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+            if (currentUser == thisRecipe.User)
+            {
             return View(thisRecipe);
+            }
+            else
+            {
+            return RedirectToAction("BozoCatcher");
+            }
         }
 
         [HttpPost, ActionName("Delete")]
