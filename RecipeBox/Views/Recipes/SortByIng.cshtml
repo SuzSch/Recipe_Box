@@ -3,6 +3,8 @@
 }
 
 @using RecipeBox.Models
+<h1> Recipes that use @ViewBag.Ingredient</h1>
+<hr>
 
 @if (@Model.Count == 0)
 {
@@ -10,12 +12,16 @@
 }
 else
 {
-    <ul>
     @foreach (RecipeIng entry in Model)
         {
-            <li>@Html.ActionLink($"{entry.Recipe.RecipeName}", "Details", new {id = entry.Recipe.RecipeId}) : Rating: @entry.Recipe.Rating</li>
+            <h4>@Html.ActionLink($"{entry.Recipe.RecipeName}", "Details", new {id = entry.Recipe.RecipeId}) : Rating:
+                @for(int i = 1; i <= entry.Recipe.Rating; i++)
+                {
+                    <img src="~/img/chickenrating.png" alt="small shiny roasted delicious chicken" width="25x" height="20px">
+                } 
+            </h4>
         }
-    </ul>
 }
+<hr>
 
 <p>@Html.ActionLink("Back to Recipe List", "Index")</p>

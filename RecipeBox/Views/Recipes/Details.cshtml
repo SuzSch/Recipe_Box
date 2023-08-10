@@ -6,11 +6,15 @@
 @model RecipeBox.Models.Recipe
 
 <h1>Recipe Details:</h1>
+<hr>
 
 <h2>Name: @Html.DisplayFor(model => model.RecipeName)</h2>
 <h2>Directions: @Html.DisplayFor(model => model.Directions )</h2>
-<h2>Rating: @Html.DisplayFor(model => model.Rating)</h2>
-
+<h4>Rating: @for(int i = 1; i <= Model.Rating; i++)
+                {
+                    <img src="~/img/chickenrating.png" alt="small shiny roasted delicious chicken" width="25x" height="20px">
+                } </h2>
+<hr>
 @if (@Model.JoinEntities.Count == 0)
 {
     <p>This recipe does not have any ingredients added yet, ya dingus!</p>
@@ -21,7 +25,7 @@ else
     <ul>
     @foreach (RecipeIng join in Model.JoinEntities)
         {
-            <li>@join.Ing.Name</li>
+            <h5>@join.Ing.Name</h5>
             @using (Html.BeginForm("DeleteJoin", "Recipes"))
             {
                 @Html.Hidden("joinId", @join.RecipeIngId)
@@ -38,7 +42,7 @@ else
 
     <input type="submit" value="Add Ingredient" />
 }
-
+<hr>
 <p>@Html.ActionLink("Back to Recipe List", "Index")</p>
 <p>@Html.ActionLink("Edit Recipe", "Edit", new {id = Model.RecipeId})</p>
 <p>@Html.ActionLink("Delete Recipe", "Delete", new {id = Model.RecipeId})</p>

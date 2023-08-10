@@ -7,6 +7,7 @@
 
 
 <h1>Here are your recipes!</h1>
+<hr>
 
 @if (ViewBag.Warning != null)
 {
@@ -19,18 +20,19 @@
 }
 else
 {
-    <ul>
     @foreach (Recipe recipe in Model)
         {
-            <li>@Html.ActionLink($"{recipe.RecipeName}", "Details", new {id = recipe.RecipeId}) : Rating: @recipe.Rating</li>
-            @* @HtmlGenericControl li = new HtmlGenericControl("li");
-            @for(int i = 0; i <= @recipe.Rating; i++)
-            {
-                li.Append("Hi!");
-            } *@
+            <h4>
+            @Html.ActionLink($"{recipe.RecipeName}", "Details", new {id = recipe.RecipeId}) : Rating: 
+                @for(int i = 1; i <= recipe.Rating; i++)
+                {
+                    <img src="~/img/chickenrating.png" alt="small shiny roasted delicious chicken" width="25x" height="20px">
+                } 
+            </h4>
+           
         }
-    </ul>
 }
+<hr>
 <h3>Find a recipe by your favorite ingredient.</h3>
 @using (Html.BeginForm("SortByIng", "Recipes"))
 {
@@ -39,5 +41,6 @@ else
 
     <input type="submit" value="See Recipe" />
 }
+<hr>
 <p>@Html.ActionLink("Add a new recipe", "Create")</p>
 <p>@Html.ActionLink("Back to home page", "Index", "Home")</p>

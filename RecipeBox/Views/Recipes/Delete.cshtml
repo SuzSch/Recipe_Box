@@ -5,11 +5,12 @@
 @model RecipeBox.Models.Recipe
 
 <h1>Are you sure you would like to delete this recipe?</h1>
+<hr>
 
-@Html.DisplayNameFor(model => model.RecipeName) : @Html.DisplayFor(model => model.RecipeName)
+<h3>Recipe : @Html.DisplayFor(model => model.RecipeName)</h3>
 @using (Html.BeginForm())
 {
     <input type="submit" value="Delete" />
 }
-
+<hr>
 @Html.ActionLink("Back to recipe list", "Index")

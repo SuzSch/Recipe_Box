@@ -17,8 +17,10 @@
     @Html.HiddenFor(model => model.RecipeId)
     @Html.LabelFor(model => model.RecipeName)
     @Html.EditorFor(model => model.RecipeName)
+    <br>
     @Html.LabelFor(model => model.Directions)
-    @Html.EditorFor(model => model.Directions, new { @class = "directionBox"})
+    @Html.EditorFor(model => model.Directions)
+    <br>
 
     @Html.LabelFor(model => model.Rating)
     @Html.TextBoxFor(model => model.Rating, new { @type = "number", @min = 0, @max = 5})

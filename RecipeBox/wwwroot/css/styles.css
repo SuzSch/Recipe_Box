@@ -1,9 +1,10 @@
-
 body {
   margin-bottom: 60px;
+  text-align: center;
+  background-image: url("https://cdn.dribbble.com/users/76620/screenshots/1909179/foodpattern-drbl800.gif");
 }
 
 .directionBox {
   width: 500px;
-  height: 50px;
+  height: 40px;
 }

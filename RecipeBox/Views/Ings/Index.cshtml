@@ -13,17 +13,18 @@
 }
 else 
 {
-    <ul>
         @foreach (Ing ing in Model)
         {
-            <li>@ing.Name </li>
+            <h5>
+            @ing.Name
             @using (Html.BeginForm("Delete", "Ings"))
             {
                 @Html.Hidden("id", ing.IngId)
                 <input type="submit" value="Delete" />
             }
+            </h5>
         }
-    </ul>
+    
 }
 <hr>
 

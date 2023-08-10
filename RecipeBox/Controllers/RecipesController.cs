@@ -181,6 +181,10 @@ namespace RecipeBox.Controllers
                                     .Include(entry => entry.Recipe)  
                                     .Where(entry => entry.Recipe.User.Id == currentUser.Id)                                
                                     .ToList();
+            Ing ingredient = _db.Ings.FirstOrDefault(entry => entry.IngId == ingId);
+            string chosenOne = ingredient.Name;
+            ViewBag.Ingredient = chosenOne;
+   
             return View(entries);
         }
 

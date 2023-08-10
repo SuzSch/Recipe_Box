@@ -26,6 +26,7 @@ namespace RecipeBox.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.Title = "Add Ingredient";
