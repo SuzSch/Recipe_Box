@@ -5,11 +5,13 @@
 @using RecipeBox.Models
 @model RecipeBox.Models.Recipe
 
+<div class="text-container">
 <h1>Recipe Details:</h1>
-<hr>
+</div>
 
+<div class="text-container">
 <h2>Name: @Html.DisplayFor(model => model.RecipeName)</h2>
-<h2>Directions: @Html.DisplayFor(model => model.Directions )</h2>
+<h4>Directions: @Html.DisplayFor(model => model.Directions )</h2>
 <h4>Rating: @for(int i = 1; i <= Model.Rating; i++)
                 {
                     <img src="~/img/chickenrating.png" alt="small shiny roasted delicious chicken" width="25x" height="20px">
@@ -46,3 +48,4 @@ else
 <p>@Html.ActionLink("Back to Recipe List", "Index")</p>
 <p>@Html.ActionLink("Edit Recipe", "Edit", new {id = Model.RecipeId})</p>
 <p>@Html.ActionLink("Delete Recipe", "Delete", new {id = Model.RecipeId})</p>
+</div>

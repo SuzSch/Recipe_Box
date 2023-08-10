@@ -3,10 +3,11 @@
 }
 
 @model RecipeBox.Models.Recipe
-
+<div class="text-container">
 <h1>Are you sure you would like to delete this recipe?</h1>
-<hr>
+</div>
 
+<div class="text-container">
 <h3>Recipe : @Html.DisplayFor(model => model.RecipeName)</h3>
 @using (Html.BeginForm())
 {
@@ -14,3 +15,4 @@
 }
 <hr>
 @Html.ActionLink("Back to recipe list", "Index")
+</div>

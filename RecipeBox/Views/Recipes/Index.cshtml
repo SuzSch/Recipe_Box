@@ -5,10 +5,11 @@
 @using RecipeBox.Models;
 
 
-
+<div class="text-container">
 <h1>Here are your recipes!</h1>
-<hr>
+</div>
 
+<div class="text-container">
 @if (ViewBag.Warning != null)
 {
     <p>@ViewBag.Warning</p>
@@ -44,3 +45,4 @@ else
 <hr>
 <p>@Html.ActionLink("Add a new recipe", "Create")</p>
 <p>@Html.ActionLink("Back to home page", "Index", "Home")</p>
+</div>

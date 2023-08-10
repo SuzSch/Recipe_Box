@@ -4,9 +4,11 @@
 
 @model RecipeBox.Models.Ing 
 
+<div class="text-container">
 <h2> Add an Ingredient to database</h2>
-<hr>
+</div>
 
+<div class="text-container">
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.Name)
@@ -16,3 +18,4 @@
 <hr>
 
 <p>@Html.ActionLink("Back to Ingredients", "Index")</p>
+</div>

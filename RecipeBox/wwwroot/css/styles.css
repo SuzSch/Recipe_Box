@@ -8,3 +8,18 @@ body {
   width: 500px;
   height: 40px;
 }
+
+.text-container{
+  background-color: rgba(245, 243, 239, 0.977);
+  border-style: solid;
+  border-color: red;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+hr {
+  color: red;
+  border-top: 2px dotted;
+}

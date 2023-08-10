@@ -4,7 +4,7 @@
 @using RecipeBox.Models;
 
 <img src="~/img/LOGO.jpg" alt="modern drawing of a chicken with the words recipe box across it" width="33%">
-
+<div class="text-container">
 @if (User.Identity.IsAuthenticated)
 {
     <h1>Welcome to Your Recipe Box, @User.Identity.Name!</h1>
@@ -17,3 +17,4 @@ else
 <p>@Html.ActionLink("Manage recipes", "Index", "Recipes")</p>
 <p>@Html.ActionLink("Manage ingredients", "Index", "Ings")</p>
 <p>@Html.ActionLink("Create or manage an account", "Index", "Account")</p>
+</div>

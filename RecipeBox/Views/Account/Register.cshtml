@@ -5,9 +5,11 @@
 @using RecipeBox.ViewModels
 @model RegisterViewModel
 
+<div class="text-container">
 <h1>Register for an account</h1>
-<hr>
+</div>
 
+<div class="text-container">
 @if(!ViewData.ModelState.IsValid)
 {
     @Html.ValidationSummary("Please fix the following error(s) and then resubmit the form:")
@@ -30,3 +32,4 @@
 
 <@Html.ActionLink("Back to accounts page", "Index")>
 <p>@Html.ActionLink("Back to Home", "Index", "Home")</p>
+</div>

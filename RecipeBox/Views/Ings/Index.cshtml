@@ -4,9 +4,11 @@
 
 @using RecipeBox.Models;
 
+<div class="text-container">
 <h1>Ingredients</h1>
-<hr>
+</div>
 
+<div class="text-container">
 @if (Model.Count == 0)
 {
     <h3>No ingredients have been added to the site's database, you jumbo dumbo!</h3>
@@ -30,3 +32,4 @@ else
 
 <p>@Html.ActionLink("Add Ingredient", "Create")</p>
 <p>@Html.ActionLink("Back to Home", "Index", "Home")</p>
+</div>
