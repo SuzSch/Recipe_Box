@@ -24,17 +24,18 @@
 else
 {
     <h4>Ingredients:</h4>
-    <ul>
+
     @foreach (RecipeIng join in Model.JoinEntities)
         {
-            <h5>@join.Ing.Name</h5>
+            <h5>@join.Ing.Name
             @using (Html.BeginForm("DeleteJoin", "Recipes"))
             {
                 @Html.Hidden("joinId", @join.RecipeIngId)
                 <input type="submit" value="Delete"/>
             }
+            </h5>
         }
-    </ul>
+
 }
 @using (Html.BeginForm("AddIng", "Recipes"))
 {

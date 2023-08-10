@@ -1,38 +1,40 @@
 @{
-    Layout ="_Layout";
+    Layout = "_Layout";
 }
 <div class="text-container">
-<h1> Edit Recipe</h1>
+    <h1> Edit Recipe</h1>
 </div>
 
 @model RecipeBox.Models.Recipe
 
 <div class="text-container">
-@if(!ViewData.ModelState.IsValid)
-{
-    @Html.ValidationSummary("Please fix the following error(s) and then resubmit the form:")
-}
+    @if (!ViewData.ModelState.IsValid)
+    {
+        @Html.ValidationSummary("Please fix the following error(s) and then resubmit the form:")
+    }
 
-@using (Html.BeginForm())
-{
-    @Html.HiddenFor(model => model.RecipeId)
-    @Html.LabelFor(model => model.RecipeName)
-    @Html.EditorFor(model => model.RecipeName)
-    <br>
-    @Html.LabelFor(model => model.Directions)
-    @Html.EditorFor(model => model.Directions)
-    <br>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.RecipeId)
+        @Html.LabelFor(model => model.RecipeName)
+        @Html.EditorFor(model => model.RecipeName)
+        <br>
+      
+        @Html.LabelFor(model => model.Directions)
+        @Html.EditorFor(model => model.Directions)
+      
+        <br>
 
-    @Html.LabelFor(model => model.Rating)
-    @Html.TextBoxFor(model => model.Rating, new { @type = "number", @min = 0, @max = 5})
+        @Html.LabelFor(model => model.Rating)
+        @Html.TextBoxFor(model => model.Rating, new { @type = "number", @min = 0, @max = 5})
 
 
 
 
-    <input type="submit" value="Edit Recipe">
-}
+        <input type="submit" value="Edit Recipe">
+    }
 
-<hr>
+    <hr>
 
-<p>@Html.ActionLink("Back to Details", "Details", new {id = Model.RecipeId})</p>
+    <p>@Html.ActionLink("Back to Details", "Details", new {id = Model.RecipeId})</p>
 </div>

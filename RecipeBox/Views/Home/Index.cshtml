@@ -1,9 +1,11 @@
 ﻿@{
     Layout = "_Layout";
 }
+
+
 @using RecipeBox.Models;
 
-<img src="~/img/LOGO.jpg" alt="modern drawing of a chicken with the words recipe box across it" width="33%">
+<img src="~/img/Recipe_Box.png" alt="modern drawing of a chicken with the words recipe box across it" width="33%">
 <div class="text-container">
 @if (User.Identity.IsAuthenticated)
 {
@@ -17,4 +19,8 @@ else
 <p>@Html.ActionLink("Manage recipes", "Index", "Recipes")</p>
 <p>@Html.ActionLink("Manage ingredients", "Index", "Ings")</p>
 <p>@Html.ActionLink("Create or manage an account", "Index", "Account")</p>
+
+<audio autoplay>
+    <source src="~/music/HomePage.mp3">
+</audio>
 </div>

@@ -20,7 +20,7 @@
     @Html.TextBoxFor(model => model.RecipeName)
     <br>
     @Html.LabelFor(model => model.Directions)
-    @Html.TextBoxFor(model => model.Directions, new { @class = "directionBox"})
+    @Html.TextAreaFor(model => model.Directions, new { @class = "directionBox"})
     <br>
     @Html.LabelFor(model => model.Rating)
     @Html.TextBoxFor(model => model.Rating, new { @type = "number", @min = 0, @max = 5})

@@ -2,9 +2,13 @@
     Layout = "_Layout";
 }
 
+<audio autoplay="autoplay">
+    <source src="~/music/Bozo-stinger.mp3">
+</audio>
 <div class="text-container">
 <h3> Nice try, @Model.UserName, you Bozo! You weren't authorized to see that page!!</h3>
 
 
 <p>@Html.ActionLink("Back to Home", "Index", "Home")</p>
 </div>
+@* <embed name="Bozo-stinger" src="~/music/Bozo-stinger.mp3" loop="false" hidden="true" autostart="true"> *@
